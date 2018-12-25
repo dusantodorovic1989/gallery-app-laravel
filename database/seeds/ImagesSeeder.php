@@ -1,5 +1,6 @@
 <?php
-
+use App\Gallery;
+use App\Image;
 use Illuminate\Database\Seeder;
 
 class ImagesSeeder extends Seeder
@@ -11,6 +12,8 @@ class ImagesSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Image::class, 20)->create();
+        Gallery::all()->each(function(Gallery $gallery){
+            $gallery->images()->saveMany(factory(Image::class, 10)->make());
+        });
     }
 }

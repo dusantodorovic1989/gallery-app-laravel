@@ -8,7 +8,8 @@ class Image extends Model
 {
     protected $fillable = [
         'image_url',
-        'gallery_id'
+        'gallery_id',
+        'user_id'
     ];
     public function galleries()
     {

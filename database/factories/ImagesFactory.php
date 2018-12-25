@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Image::class, function (Faker $faker) {
     return [
         'image_url' => $faker->imageUrl($width = 740, $height = 400, 'abstract'), 
-        'gallery_id'=>App\Gallery::all()->random()->id,
+        
     ];
 });
 
