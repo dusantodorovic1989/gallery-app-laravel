@@ -14,7 +14,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        return Gallery::all();
     }
 
     /**
@@ -35,7 +35,7 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Gallery::create($request->only(['title', 'description', 'user_id']));
     }
 
     /**
@@ -46,7 +46,7 @@ class GalleryController extends Controller
      */
     public function show(Gallery $gallery)
     {
-        //
+        return $gallery;
     }
 
     /**
@@ -69,7 +69,8 @@ class GalleryController extends Controller
      */
     public function update(Request $request, Gallery $gallery)
     {
-        //
+        $gallery->update($request->only(['title', 'description', 'user_id']));
+        return $gallery;
     }
 
     /**
@@ -80,6 +81,7 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-        //
+        $gallery->delete();
+        return $gallery;
     }
 }
