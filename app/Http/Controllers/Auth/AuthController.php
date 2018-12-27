@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Http\Request\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,6 +39,6 @@ class AuthController extends Controller
 		$user->email = $request->email;
 		$user->password = bcrypt($request->password);
 		$user->save();
-		return $this->login($request);
+		return $user;
 	}
 }
