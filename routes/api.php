@@ -21,4 +21,19 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::resource('galleries', GalleryController::class);
+// Route::resource('galleries', GalleryController::class);
+
+
+Route::middleware('auth:api')->group(function(){
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+	});
+	Route::resource('galleries', GalleriesController::class)->except(['create', 'edit']);
+});
+Route::group([
+	'prefix' => 'auth',
+	'namespace' => 'Auth'
+], function() {
+	Route::post('login', 'AuthController@login');
+	Route::post('register', 'AuthController@register');
+});
