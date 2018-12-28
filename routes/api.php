@@ -23,13 +23,17 @@ use Illuminate\Http\Request;
 
 // Route::resource('galleries', GalleryController::class);
 
+Route::post('galleries/{id}/comments', 'CommentsController@store');
+Route::delete('comments/{id}', 'CommentsController@destroy');
+Route::resource('galleries', GalleryController::class)->except(['create']);
 
-Route::middleware('auth:api')->group(function(){
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-	});
-});
-Route::resource('galleries', GalleryController::class)->except(['create', 'edit']);
+// Route::middleware('auth:api')->group(function(){
+//     Route::get('/user', function (Request $request) {
+//         return $request->user();
+// 	});
+// });
+
+
 Route::group([
 	'prefix' => 'auth',
 	'namespace' => 'Auth'
