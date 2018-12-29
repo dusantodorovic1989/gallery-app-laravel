@@ -17,7 +17,9 @@ $factory->define(App\Gallery::class, function (Faker $faker) {
     return [
             'title' => $faker->sentence($nvWords = 4, $variableNbWords = true),
             'description'=> $faker->text($maxNbChars = 200),
-            'user_id'=> App\User::all()->random()->id
+            'user_id' => function() {
+                return App\User::all()->random()->id;
+             },
         
     ];
 });
