@@ -18,6 +18,7 @@ class AuthController extends Controller
 	{
 		$credentials = $request->only(['email', 'password']);
 		$token = auth()->attempt($credentials);
+
 		if (!$token) {
 			return response()->json([
 				'message' => 'You are not authorized!'
@@ -39,6 +40,11 @@ class AuthController extends Controller
 		$user->email = $request->email;
 		$user->password = bcrypt($request->password);
 		$user->save();
-		return $user;
+		return $this->login($request);
 	}
+	// public function logout()
+	// {
+	// 		auth()->logout();
+	// 		return response()->json(['message' => 'Successfully logged out']);
+	// }
 }
