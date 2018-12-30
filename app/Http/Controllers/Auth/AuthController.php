@@ -42,9 +42,9 @@ class AuthController extends Controller
 		$user->save();
 		return $this->login($request);
 	}
-	// public function logout()
-	// {
-	// 		auth()->logout();
-	// 		return response()->json(['message' => 'Successfully logged out']);
-	// }
+	public function logout()
+	{
+			auth()->logout();
+			return response()->json(['message' => 'Successfully logged out']);
+	}
 }
