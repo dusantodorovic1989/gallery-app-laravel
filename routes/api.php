@@ -25,7 +25,10 @@ use Illuminate\Http\Request;
 
 Route::post('galleries/{id}/comments', 'CommentsController@store');
 Route::delete('comments/{id}', 'CommentsController@destroy');
+Route::get('author-galleries/{id}', 'AuthorsGalleriesController@index');
 Route::resource('galleries', GalleryController::class)->except(['create']);
+
+Route::get('authors-galleries/{id}', 'AuthorsGalleriesController@index');
 
 // Route::middleware('auth:api')->group(function(){
 //     Route::get('/user', function (Request $request) {
