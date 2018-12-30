@@ -33,12 +33,14 @@ class Gallery extends Model
             $query->where('user_id', $user);
         }
         if($term) {
-            $query->where('title', 'like', '%' . $term . '%')
-            ->orWhere('description', 'like', '%' . $term . '%')
-            ->orWhereHas('user', function($q) use ($term){  
-                $q->where('first_name', 'like', '%' . $term . '%')
-                ->orWhere('last_name', 'like', '%' . $term . '%');
-            });
+            $query->where(function($que) use ($term){
+                $que->where('title', 'like', '%'.$term.'%')
+                  ->orWhere('description','like', '%'.$term.'%')
+                  ->orWhereHas('user', function($q) use ($term){
+                      $q->where('first_name', 'like', '%'.$term.'%')
+                        ->orWhere('last_name','like', '%'.$term.'%');
+                  });
+                });
         }
         $count = $query->count();
         $galleries = $query->skip(($page-1) * 10)
@@ -52,14 +54,14 @@ class Gallery extends Model
         return Gallery::with('user', 'images', 'comments.user')
                         ->findOrFail($id);
     }
-    public static function storeGallery($request)
-    {
-        $user = auth()->user()->id;
+    // public static function storeGallery($request)
+    // {
+    //     $user = auth()->user()->id;
 
-        $gallery = new Gallery();
-        $gallery->title = $request->title;
-        $gallery->description = $request->description;
-        $gallery->user_id = $user;
-        $gallery->save();
-    }
+    //     $gallery = new Gallery();
+    //     $gallery->title = $request->title;
+    //     $gallery->description = $request->description;
+    //     $gallery->user_id = $user;
+    //     $gallery->save();
+    // }
 }

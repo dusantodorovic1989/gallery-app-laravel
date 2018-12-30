@@ -26,7 +26,12 @@ use Illuminate\Http\Request;
 Route::post('galleries/{id}/comments', 'CommentsController@store');
 Route::delete('comments/{id}', 'CommentsController@destroy');
 Route::get('author-galleries/{id}', 'AuthorsGalleriesController@index');
-Route::resource('galleries', GalleryController::class)->except(['create']);
+//Route::resource('galleries', GalleryController::class)->except(['create']);
+Route::post('galleries', 'GalleryController@store');
+Route::get('galleries', 'GalleryController@index');
+Route::get('galleries/{id}', 'GalleryController@show');
+Route::put('galleries/{id}', 'GalleryController@update');
+Route::delete('galleries/{id}', 'GalleryController@destroy');
 
 Route::get('authors-galleries/{id}', 'AuthorsGalleriesController@index');
 
@@ -47,5 +52,5 @@ Route::group([
 ], function() {
 	Route::post('login', 'AuthController@login');
 	Route::post('register', 'AuthController@register');
-	
+	Route::get('logout', 'AuthController@logout');
 });
